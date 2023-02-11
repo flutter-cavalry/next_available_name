@@ -44,9 +44,9 @@ void main() {
         'myName (4)');
   });
 
-  test('Start from 3-4', () async {
-    Set<String> set = {};
-    var name = '$defName (2)';
+  test('Start from 3-5', () async {
+    Set<String> set = {'$defName (4)'};
+    var name = '$defName (3)';
     Future<bool> availableFn(String name) async {
       if (!set.contains(name)) {
         set.add(name);
@@ -58,6 +58,6 @@ void main() {
     expect(await nextAvailableName(name, defMaxAttempts, availableFn),
         'myName (3)');
     expect(await nextAvailableName(name, defMaxAttempts, availableFn),
-        'myName (4)');
+        'myName (5)');
   });
 }
