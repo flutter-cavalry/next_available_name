@@ -1,3 +1,5 @@
+# next_available_name
+
 [![pub package](https://img.shields.io/pub/v/next_available_name.svg)](https://pub.dev/packages/next_available_name)
 [![Build Status](https://github.com/flutter-cavalry/next_available_name/workflows/Build/badge.svg)](https://github.com/flutter-cavalry/next_available_name/actions)
 
