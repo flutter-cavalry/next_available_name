@@ -60,4 +60,21 @@ void main() {
     expect(await nextAvailableName(name, defMaxAttempts, availableFn),
         'myName (5)');
   });
+
+  test('nextAvailableNameRaw', () async {
+    Set<String> set = {defName, '$defName (2)'};
+    var name = defName;
+    Future<String?> availableFn(String name) async {
+      if (!set.contains(name)) {
+        set.add(name);
+        return 'succ: $name';
+      }
+      return null;
+    }
+
+    expect(await nextAvailableNameRaw(name, defMaxAttempts, availableFn),
+        'succ: myName (3)');
+    expect(await nextAvailableNameRaw(name, defMaxAttempts, availableFn),
+        'succ: myName (4)');
+  });
 }

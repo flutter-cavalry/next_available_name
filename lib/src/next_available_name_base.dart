@@ -7,9 +7,21 @@ final _nameCounterRegex = RegExp(r'\((\d+)\)$');
 /// [availableFn] used to check if a name is available.
 Future<String?> nextAvailableName(String name, int maxAttempts,
     Future<bool> Function(String name) availableFn) async {
-  for (var i = 0; i < maxAttempts; i++) {
-    if (await availableFn(name)) {
+  return nextAvailableNameRaw(name, maxAttempts, (name) async {
+    final isAvailable = await availableFn(name);
+    if (isAvailable) {
       return name;
+    }
+    return null;
+  });
+}
+
+Future<T?> nextAvailableNameRaw<T>(String name, int maxAttempts,
+    Future<T?> Function(String name) availableFn) async {
+  for (var i = 0; i < maxAttempts; i++) {
+    final availableFnRes = await availableFn(name);
+    if (availableFnRes != null) {
+      return availableFnRes;
     }
     name = _generateNewName(name);
   }
